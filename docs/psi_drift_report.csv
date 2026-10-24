@@ -1,0 +1,13 @@
+feature,psi,drift_alert
+revolving_utilization,2.51,True
+income_missing,1.5491,True
+number_of_dependents,0.9487,True
+debt_ratio,0.6635,True
+total_past_due,0.617,True
+monthly_income,0.4577,True
+real_estate_loans,0.4527,True
+open_credit_lines,0.3389,True
+past_due_30_59,0.2487,True
+age,0.1701,False
+past_due_90,0.1659,False
+past_due_60_89,0.1342,False

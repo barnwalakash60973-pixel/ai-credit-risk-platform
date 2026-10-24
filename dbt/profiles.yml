@@ -1,0 +1,8 @@
+# profiles.yml
+credit_risk_platform:
+  outputs:
+    dev:
+      type: duckdb
+      path: "local_dev.duckdb"  
+      threads: 4
+  target: dev

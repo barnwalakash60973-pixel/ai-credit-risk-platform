@@ -1,0 +1,14 @@
+[
+  "revolving_utilization",
+  "age",
+  "past_due_30_59",
+  "past_due_60_89",
+  "past_due_90",
+  "total_past_due",
+  "debt_ratio",
+  "monthly_income",
+  "income_missing",
+  "open_credit_lines",
+  "real_estate_loans",
+  "number_of_dependents"
+]

@@ -1,0 +1,13 @@
+feature,psi,drift_alert
+debt_ratio,0.0008,False
+open_credit_lines,0.0007,False
+monthly_income,0.0006,False
+age,0.0005,False
+total_past_due,0.0005,False
+past_due_30_59,0.0003,False
+past_due_60_89,0.0003,False
+number_of_dependents,0.0002,False
+revolving_utilization,0.0001,False
+past_due_90,0.0001,False
+income_missing,0.0,False
+real_estate_loans,0.0,False

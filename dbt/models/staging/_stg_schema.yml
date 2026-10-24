@@ -1,0 +1,108 @@
+version: 2
+
+models:
+  - name: stg_credit_applications
+    description: "Staging model for applicant profiles and historical risk metrics."
+    columns:
+      - name: member_id_hash
+        description: "Unique anonymized hash for applicant identifier."
+        tests:
+          - unique
+          - not_null
+
+      - name: is_serious_delinquent
+        description: "Target binary flag for delinquency (0 or 1)."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+
+      - name: age
+        description: "Applicant age in years."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 18
+                max_value: 120
+
+      - name: payment_velocity_3m
+        description: "[DEMO-ONLY synthetic, ADR-006; not a model feature] Payment activity metric over 3 months."
+
+      - name: income_stability_score
+        description: "[DEMO-ONLY synthetic, ADR-006; not a model feature] Calculated score for income stability."
+
+      - name: employment_years
+        description: "[DEMO-ONLY synthetic, ADR-006; not a model feature] Years of employment."
+
+      - name: income_consistency
+        description: "[DEMO-ONLY synthetic, ADR-006; not a model feature] Consistency score for applicant income."
+
+      - name: credit_grade
+        description: "Assigned risk grade (A through E)."
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['A', 'B', 'C', 'D', 'E']
+
+      - name: credit_grade_ordinal
+        description: "Ordinal representation of credit grade."
+
+      # ---- real model features -------------------------------------------------
+      - name: revolving_utilization
+        description: "Revolving balance / credit limit (winsorised at the 99th percentile in Silver)."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: past_due_30_59
+        description: "Times 30-59 days past due in 2 years. NULL where the source held a 96/98 sentinel code."
+      - name: past_due_60_89
+        description: "Times 60-89 days past due in 2 years. NULL where the source held a 96/98 sentinel code."
+      - name: past_due_90
+        description: "Times 90+ days late in 2 years. NULL where the source held a 96/98 sentinel code."
+      - name: total_past_due
+        description: "Sum of the three past-due counts."
+      - name: debt_ratio
+        description: "Monthly debt / monthly income. NULL when income is missing (source value is then an absolute amount)."
+      - name: monthly_income
+        description: "Applicant monthly income; NULL when not reported (see income_missing)."
+      - name: income_missing
+        description: "1 when monthly income was not reported."
+        tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+      - name: number_of_dependents
+        description: "Number of dependents (median-imputed)."
+      - name: open_credit_lines
+        description: "Number of open credit lines and loans."
+      - name: real_estate_loans
+        description: "Number of real estate loans or lines."
+
+  - name: stg_transactions
+    description: "Staging model for historical transactions."
+    columns:
+      - name: member_id_hash
+        description: "Anonymized applicant hash."
+        tests:
+          - not_null
+
+      - name: month_offset
+        description: "Offset month index (1 to 3)."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                max_value: 3
+
+      - name: delinquency_flag
+        description: "Transaction-level delinquency flag (0 or 1)."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]

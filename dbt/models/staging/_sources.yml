@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: bronze
+    meta:
+      external_location: "{{ env_var('BRONZE_PARQUET_GLOB', '../data/bronze/ingest_date=*/*.parquet') }}"
+    tables:
+      - name: credit_applications
+
+  - name: silver_raw
+    meta:
+      external_location: "{{ env_var('SILVER_PARQUET_DIR', '../data') }}"
+    tables:
+      - name: applicants_silver_final
+        meta:
+          external_location: "{{ env_var('SILVER_APPLICANTS_PATH', '../data/silver/applicants_silver_final.parquet') }}"
+      - name: transactions
+        meta:
+          external_location: "{{ env_var('SILVER_TRANSACTIONS_PATH', '../data/silver/transactions.parquet') }}"

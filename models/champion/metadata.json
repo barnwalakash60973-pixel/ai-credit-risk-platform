@@ -1,0 +1,32 @@
+{
+  "model_name": "credit_risk_xgboost",
+  "version": 1,
+  "run_id": "5e14fd6f2b6f430b9b8eac4747196f91",
+  "exported_at": "2026-10-24T10:36:55+00:00",
+  "metrics": {
+    "cv_auc": 0.8676821501816345,
+    "cv_auc_mean": 0.8676821501816345,
+    "cv_auc_std": 0.001857844765400824,
+    "test_auc": 0.8594301887040828,
+    "test_ks": 0.5681024500156869,
+    "test_gini": 0.7188603774081657,
+    "test_brier": 0.0490691214799881,
+    "test_mean_pred": 0.06642298400402069,
+    "test_base_rate": 0.06652360515021459,
+    "n_train": 119709.0,
+    "n_test": 30290.0
+  },
+  "params": {
+    "n_estimators": "200",
+    "max_depth": "4",
+    "learning_rate": "0.05610784859534198",
+    "subsample": "0.7869023852636516",
+    "colsample_bytree": "0.6643108932239021",
+    "min_child_weight": "9",
+    "reg_alpha": "6.761932282248285",
+    "reg_lambda": "0.8532961286571222",
+    "n_trials": "30",
+    "cv_folds": "5",
+    "n_features": "12"
+  }
+}

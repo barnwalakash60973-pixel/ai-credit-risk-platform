@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: applicant_feature_store
+    description: "Gold-layer feature store, satu baris per applicant. Input utama untuk model training & scoring."
+    columns:
+      - name: member_id_hash
+        data_tests:
+          - not_null
+          - unique
+      - name: is_serious_delinquent
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+      - name: data_split
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["train", "test"]
+      - name: revolving_utilization
+        data_tests:
+          - not_null
+      - name: age
+        data_tests:
+          - not_null
+      - name: past_due_90
+        description: "NULL when the source held a 96/98 sentinel code (cleaned in Silver)."
+      - name: income_missing
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+
+  - name: credit_scorecard
+    description: "Business-facing scorecard dengan risk_tier_proxy (heuristic, sebelum ML scoring)."
+    columns:
+      - name: member_id_hash
+        data_tests:
+          - not_null
+          - unique
+      - name: risk_tier_proxy
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["LOW", "MEDIUM", "HIGH", "VERY_HIGH"]

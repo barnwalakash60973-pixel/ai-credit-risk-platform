@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+venu/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+
+# Env & secrets
+.env
+*.pem
+kaggle.json
+chroma_db/
+# Data
+data/raw/*
+data/bronze/*
+data/silver/*
+data/gold/*
+!data/**/.gitkeep
+
+# MinIO / Docker volumes
+minio_data/
+postgres_data/
+airflow_logs/
+airflow_data/
+dbt/local_dev.duckdb
+# MLflow
+mlruns/
+mlartifacts/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+RAW
+
+myenv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+*.duckdb
+mlruns/
+
+# Local artefacts that must not be committed
+mlflow.db
+mlflow.db.bak
+dbt/.user.yml
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+data/silver/
+data/gold/
+
+# SQLite fallback database files
+data/sqlite/
